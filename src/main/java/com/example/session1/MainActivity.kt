@@ -18,6 +18,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -59,35 +60,60 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun Greeting(modifier: Modifier = Modifier) {
     val context = LocalContext.current
+
+    //explain about state
     var count by remember {
         mutableStateOf(0)
     }
+
+    //Explain about row  and column
     Column(
+        //Explain about modifier
         modifier = modifier.fillMaxSize(),
         horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally,
         verticalArrangement = androidx.compose.foundation.layout.Arrangement.Center
     ) {
+
+
+
+        //Text
         Text(
             text = "Counter App",
             modifier = modifier
+
         )
+
+
+
+
         Text(
             text = count.toString(),
             modifier = modifier
         )
+
         Spacer(modifier = Modifier.height(16.dp))
+
         Button(onClick = { count++ }) {
             Text(text = "Increment")
         }
+
         Spacer(modifier = Modifier.height(16.dp))
+
         Button(onClick = { if (count > 0) count-- }) {
             Text(text = "Decrement")
         }
+
         Spacer(modifier = Modifier.height(16.dp))
+
         Button(onClick = { count = 0 }) {
             Text(text = "Reset")
         }
+
         Spacer(modifier = Modifier.height(16.dp))
+
+
+
+        //Button
         Button(
             onClick = {},
             colors = ButtonDefaults.buttonColors(
@@ -101,13 +127,27 @@ fun Greeting(modifier: Modifier = Modifier) {
 
                 )
         }
+
+
+
+        //Image
         Image(
             painter = painterResource(id = R.drawable.img),
             contentDescription = "Image",
             contentScale = ContentScale.Crop,
-            modifier = Modifier.size(280.dp)
+            modifier = Modifier
+                .size(280.dp)
                 .clip(RoundedCornerShape(10.dp))
         )
+
+
+
+
+        //Text field
+        var text by remember {
+            mutableStateOf("")
+        }
+        OutlinedTextField(text, onValueChange = { text =it },label = {Text("Enter your name")})
         if (count == 5) {
             Toast.makeText(context, "Reached 5", Toast.LENGTH_SHORT).show()
         }
